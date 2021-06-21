@@ -48,7 +48,7 @@ const axios = require('axios');
     try {
 	packagePayload = await axios.post(sncPackageURL, packageBody, defaultHeaders);
     } catch (e) {
-	core.setFailed('failed to create artifact package ' + e)
+	core.setFailed(`failed to create artifact package ${e} \nPayload is ${packageBody}`)
 	return
     }
 
