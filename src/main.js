@@ -8,7 +8,7 @@ const axios = require('axios');
     const pass = core.getInput('devops-integration-user-pass', { required: true });
     const defaultHeaders = { 'Content-Type': 'application/json' };
 
-    const sncPackageURL = `https://${env.DEVOPS_INTEGRATION_USER_NAME}:${env.DEVOPS_INTEGRATION_USER_PASS}@${env.INSTANCE_NAME}.service-now.com/api/sn_devops/devops/package/registration?orchestrationToolId=${env.TOOL_ID}`;
+    const sncPackageURL = `https://${username}:${pass}@${instanceName}.service-now.com/api/sn_devops/devops/package/registration?orchestrationToolId=${toolId}`;
 
     let githubContext = core.getInput('context-github', { required: true })
 
@@ -46,7 +46,7 @@ const axios = require('axios');
 
     let packagePayload;
     try {
-	packagePayload = await axios.post(sncPackageURL, packageBody, packageHeaders);
+	packagePayload = await axios.post(sncPackageURL, packageBody, defaultHeaders);
     } catch (e) {
 	core.setFailed('failed to create artifact package ' + e)
 	return
