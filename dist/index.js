@@ -3160,7 +3160,7 @@ const axios = __nccwpck_require__(126);
     try {
 	packagePayload = await axios.post(sncPackageURL, packageBody, defaultHeaders);
     } catch (e) {
-	packagePayload = JSON.stringify(packagePayload);
+	packageBody = JSON.stringify(packageBody);
 	core.setFailed(`failed to create artifact package ${e} \nPayload is ${packageBody}`)
 	return
     }
