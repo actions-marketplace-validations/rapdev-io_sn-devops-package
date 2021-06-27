@@ -30,11 +30,12 @@ const axios = require('axios');
     }
 
     let packageBody = {
-	    'name': `rapdev-package-${githubContext.run_number}`,
-	    'artifacts': artifacts,
-	    'pipelineName': `${githubContext.workflow}`,
-	    'stageName': `${githubContext.job}`,
-	    'taskExecutionNumber': `${githubContext.run_number}`
+        'name': `rapdev-package-${githubContext.run_number}`,
+        'artifacts': artifacts,
+        'pipelineName': `${githubContext.workflow}`,
+        'stageName': `${githubContext.job}`,
+        'taskExecutionNumber': `${githubContext.run_number}`,
+        'branchName': `${githubContext.run_number}`
     }
 
     let packagePayload;
@@ -43,11 +44,11 @@ const axios = require('axios');
     core.debug("Package Body " + JSON.stringify(packageBody));
 
     try {
-	packagePayload = await axios.post(sncPackageURL, packageBody, defaultHeaders);
+        packagePayload = await axios.post(sncPackageURL, packageBody, defaultHeaders);
     } catch (e) {
-	packageBody = JSON.stringify(packageBody);
-	core.setFailed(`failed to create artifact package ${e} \nPayload is ${packageBody}`)
-	return
+        packageBody = JSON.stringify(packageBody);
+        core.setFailed(`failed to create artifact package ${e} \nPayload is ${packageBody}`)
+        return
     }
 
 })();
