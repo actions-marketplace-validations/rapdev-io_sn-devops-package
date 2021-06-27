@@ -34,14 +34,14 @@ const axios = require('axios');
 	    'artifacts': artifacts,
 	    'pipelineName': `${githubContext.workflow}`,
 	    'stageName': `${githubContext.job}`,
-	    'taskExecutionNumber': `${githubContext.run_number}#${githubContext.job}`
+	    'taskExecutionNumber': `${githubContext.run_number}`
     }
 
     let packagePayload;
 
     console.log("Package Body: " + JSON.stringify(packageBody));
     core.debug("Package Body " + JSON.stringify(packageBody));
-    
+
     try {
 	packagePayload = await axios.post(sncPackageURL, packageBody, defaultHeaders);
     } catch (e) {
