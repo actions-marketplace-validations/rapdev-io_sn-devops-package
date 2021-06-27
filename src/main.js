@@ -38,6 +38,8 @@ const axios = require('axios');
     }
 
     let packagePayload;
+
+    console.log("Package Body: " + JSON.stringify(packageBody));
     try {
 	packagePayload = await axios.post(sncPackageURL, packageBody, defaultHeaders);
     } catch (e) {
