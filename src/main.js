@@ -29,19 +29,12 @@ const axios = require('axios');
         }
     }
 
-    let artifactsPayload = {
-	'artifacts': artifacts,
-	'pipelineName': `${githubContext.workflow}`,
-	'stageName': `${githubContext.job}`,
-	'taskExecutionNumber': `${githubContext.run_number}`
-    };
-
     let packageBody = {
 	    'name': `rapdev-package-${githubContext.run_number}`,
 	    'artifacts': artifacts,
 	    'pipelineName': `${githubContext.workflow}`,
 	    'stageName': `${githubContext.job}`,
-	    'taskExecutionNumber': `${githubContext.run_number}`
+	    'taskExecutionNumber': `${githubContext.run_number}#${githubContext.job}`
     }
 
     let packagePayload;
