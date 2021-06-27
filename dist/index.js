@@ -3150,6 +3150,10 @@ const axios = __nccwpck_require__(126);
     }
 
     let packagePayload;
+
+    console.log("Package Body: " + JSON.stringify(packageBody));
+    core.debug("Package Body " + JSON.stringify(packageBody));
+    
     try {
 	packagePayload = await axios.post(sncPackageURL, packageBody, defaultHeaders);
     } catch (e) {
