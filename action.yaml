@@ -1,5 +1,5 @@
-name: 'ServiceNow DevOps Artifact Registration'
-description: 'Register Job Artifacts in ServiceNow Devops'
+name: 'ServiceNow DevOps Artifact Package'
+description: 'Register Job Artifact Packages in ServiceNow Devops'
 inputs:
   devops-integration-user-name:
     description: 'Devops Integration User Name'
