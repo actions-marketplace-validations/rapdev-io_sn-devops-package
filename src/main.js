@@ -7,7 +7,6 @@ const axios = require('axios');
     const username = core.getInput('devops-integration-user-name', { required: true });
     const pass = core.getInput('devops-integration-user-pass', { required: true });
     const defaultHeaders = { 'Content-Type': 'application/json' };
-
     const sncPackageURL = `https://${username}:${pass}@${instanceName}.service-now.com/api/sn_devops/devops/package/registration?toolId=${toolId}&orchestrationToolId=${toolId}`;
 
     let githubContext = core.getInput('context-github', { required: true });
@@ -30,7 +29,7 @@ const axios = require('axios');
     }
 
     let packageBody = {
-        'name': `rapdev-package-${githubContext.run_number}`,
+        'name': `${githubContext.repository}-package-${githubContext.run_number}`,
         'artifacts': artifacts,
         'pipelineName': `${githubContext.repository}/${githubContext.workflow}`,
         'stageName': `${githubContext.job}`,
