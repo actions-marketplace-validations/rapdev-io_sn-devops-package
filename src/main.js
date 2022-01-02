@@ -10,11 +10,16 @@ const axios = require('axios');
     const sncPackageURL = `https://${username}:${pass}@${instanceName}.service-now.com/api/sn_devops/devops/package/registration?toolId=${toolId}&orchestrationToolId=${toolId}`;
 
     let githubContext = core.getInput('context-github', { required: true });
+    let packageName = core.getInput('name', { required: false });
 
     try {
         githubContext = JSON.parse(githubContext);
     } catch (e) {
         core.setFailed(`exception parsing github context ${e}`);
+    }
+
+    if(!packageName) {
+        packageName = `${githubContext.repository}-package-${githubContext.run_number}`;
     }
 
 
@@ -29,20 +34,20 @@ const axios = require('axios');
     }
 
     let packageBody = {
-        'name': `${githubContext.repository}-package-${githubContext.run_number}`,
+        'name': packageName,
         'artifacts': artifacts,
         'pipelineName': `${githubContext.repository}/${githubContext.workflow}`,
         'stageName': `${githubContext.job}`,
         'taskExecutionNumber': `${githubContext.run_number}`
     }
 
-    let packagePayload;
+    let response;
 
     console.log("Package Body: " + JSON.stringify(packageBody));
-    core.debug("Package Body " + JSON.stringify(packageBody));
 
     try {
-        packagePayload = await axios.post(sncPackageURL, packageBody, defaultHeaders);
+        response = await axios.post(sncPackageURL, packageBody, defaultHeaders);
+        console.log("ServiceNow Status: " + response.status + "; Response: " + JSON.stringify(response.data));
     } catch (e) {
         packageBody = JSON.stringify(packageBody);
         core.setFailed(`failed to create artifact package ${e} \nPayload is ${packageBody}`);
