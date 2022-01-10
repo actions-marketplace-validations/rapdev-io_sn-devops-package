@@ -1,17 +1,14 @@
 name: 'ServiceNow DevOps Artifact Package'
-description: 'Register Job Artifact Packages in ServiceNow Devops'
+description: 'Register Job Artifact Packages in ServiceNow DevOps'
 inputs:
   devops-integration-user-name:
-    description: 'Devops Integration User Name'
+    description: 'DevOps Integration User Name'
     required: true
   devops-integration-user-pass:
-    description: 'Devops Integration User Pass'
+    description: 'DevOps Integration User Pass'
     required: true
   instance-name: 
     description: 'ServiceNow Instance Name (e.g.: rapdevio)'
-    required: true
-  state:
-    description: 'Orchestration Task State'
     required: true
   tool-id:
     description: 'Orchestration tool id'
@@ -22,6 +19,9 @@ inputs:
   artifacts:
     description: 'List of artifacts to register'
     required: true
+  name:
+    description: 'Package name'
+    required: false
 branding:
   icon: 'arrow-right-circle'
   color: 'blue'
