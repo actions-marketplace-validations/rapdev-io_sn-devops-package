@@ -33,12 +33,17 @@ const axios = require('axios');
         }
     }
 
+    let stageName = core.getInput('stage-name', { required: false });
     let packageBody = {
         'name': packageName,
         'artifacts': artifacts,
         'pipelineName': `${githubContext.repository}/${githubContext.workflow}`,
         'stageName': `${githubContext.job}`,
         'taskExecutionNumber': `${githubContext.run_number}`
+    }
+
+    if(stageName) {
+            artifactBody.stageName = stageName;
     }
 
     let response;
