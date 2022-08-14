@@ -3699,7 +3699,7 @@ const axios = __nccwpck_require__(56);
     }
 
     if(stageName) {
-            artifactBody.stageName = stageName;
+            packageBody.stageName = stageName;
     }
 
     let response;

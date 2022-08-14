@@ -43,7 +43,7 @@ const axios = require('axios');
     }
 
     if(stageName) {
-            artifactBody.stageName = stageName;
+            packageBody.stageName = stageName;
     }
 
     let response;
